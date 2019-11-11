@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { axiosWithAuth } from '../utils/axiosWithAuth'
+import axios from 'axios'
 
 const Login = (props) => {
   const [value, setValue] = useState({
@@ -12,10 +12,10 @@ const Login = (props) => {
   const handleSubmit = e => {
     e.preventDefault()
 
-    axiosWithAuth().post('localhost:5000/api/login', value)
+    axios.post('http://localhost:5000/api/login', value)
     .then(res => {
-      console.log(res.data.value)
-      localStorage.setItem('token', res.value.token)
+      console.log(res.data)
+      localStorage.setItem('token', res.data.token)
       props.history.push('/BubblePage')
       })
     .catch(err => console.log(err.response))
